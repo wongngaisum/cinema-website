@@ -1,0 +1,59 @@
+doctype html
+html
+  head
+    title Order Confirmation
+    meta(
+      name='viewport'
+      content='width=device-width, initial-scale=1.0'
+    )
+    link(
+      rel='stylesheet'
+      href='stylesheets/confirm.css'
+    )
+  body
+    .nav
+      a.left(href='main') HK Cinema
+      a.right(href='logout') Logout
+      a.right(href='history') Purchase History
+      a.right(href='comment') Movie Review
+      a.active.right(href='buywelcome') Buy A Ticket
+      
+    main
+      .container
+        h1 Order information
+        br
+        br
+          
+        -var totalFee = 0;
+        
+        - for (var i in seats)
+          if i != 'BroadCastID'
+            .info.
+              Cinema&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:  HK<br>
+              House&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:  House #{film.HouseID}<br>
+              SeatNo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: #{i}<br>
+              Film&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:  #{film.FilmName}<br>
+              Category&nbsp;&nbsp;&nbsp;:  #{film.Category}<br>
+              Show Time&nbsp;&nbsp;:  #{film.Dates} (#{film.Day}) #{film.Time}<br>
+            - if (seats[i] == 'adult')
+              .info.
+                Ticket Fee&nbsp;: $75(Adult)<br>
+              - totalFee += 75;
+            - else
+              .info.
+                Ticket Fee&nbsp;: $50(Student/Senior)<br>
+              - totalFee += 50;
+              
+            br
+          
+        p#totalFee Total fee: $ #{totalFee}
+          
+        br
+        hr
+        br
+        p Please present valid proof of age/status when purchasing Student or Senior tickets before entering the cinema house.
+        br
+        button.button(
+          onclick='location.href="buywelcome"'
+          type='button'
+        ) OK

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Create Account</title>
+	<link rel="shortcut icon" href="favicon.ico" type="image/icon"> 
+	<link rel="icon" href="favicon.ico" type="image/icon"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="style/createaccount.css">
+</head>
+<body>
+	<div class="register-page">
+		<h1>Welcome to HK Cinema</h1>
+		<hr>
+		<form action="create.php" onsubmit="return checkValid();" method="post">
+			<p class="title">Username</p>
+		  	<input type="text" id="username" name="username" placeholder="Desired Username">
+		  	<p class="title">Password</p>
+		  	<input type="password" id="password" name="password" placeholder="Your Password">
+		  	<br><br>
+		  	<button class="button" onclick="location.href='index.html'" type="button">Back</button>
+		  	<br>
+		  	<input class="button" type="submit" value="Sign Up">
+		</form> 
+	</div>
+	<script>
+		function checkValid() {
+			var ac = document.getElementById("username");
+			var pw = document.getElementById("password");
+			if (!ac.value || !pw.value) {
+				alert("Please do not leave the fields empty");	
+				return false;
+			}
+			if (ac.value.length < 3) {
+				alert("Username must be longer than 3 characters");
+				return false;
+			}
+			if (!isAlphaNumeric(ac.value)) {
+				alert("Username can only consist of characters and numbers");
+				return false;
+			}
+			if (pw.value.length < 6 || pw.value.length > 15 || !alphaAndNumeric(pw.value)) {
+				alert("The length of the password must be between 6 to 15 characters and it must consist of only alphanumerical characters with at least one alphabet and one numerical character");
+				return false;
+			}
+			return true;
+		}
+
+		function isAlphaNumeric(str) {
+			var code, i, len;
+			for (i = 0, len = str.length; i < len; i++) {
+				code = str.charCodeAt(i);
+				if (!(code > 47 && code < 58) && !(code > 64 && code < 91) && !(code > 96 && code < 123)) {
+					return false;
+				}
+			}
+			return true;
+		};
+
+		function alphaAndNumeric(str) {
+			var code, i, len;
+			var alpha, numeric;
+			for (i = 0, len = str.length; i < len; i++) {
+				code = str.charCodeAt(i);
+				if (code > 47 && code < 58) {
+					numeric = true;
+					continue;
+				}
+				if ((code > 64 && code < 91) || (code > 96 && code < 123)) {
+					alpha = true;
+					continue;
+				}
+				return false;
+		  	}
+		  	if (alpha && numeric)
+				return true;
+			else
+				return false;
+		};
+	</script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+doctype html
+html
+  head
+    title= title
+  body
+    #{size}= status
+    script.
+      setTimeout(() => {
+        window.location.href = '#{location}';
+        }, 3000
+      );

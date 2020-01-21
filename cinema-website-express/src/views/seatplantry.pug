@@ -1,0 +1,88 @@
+doctype html
+html
+  head
+    title Ticketing
+    meta(
+      name='viewport'
+      content='width=device-width, initial-scale=1.0'
+    )
+    link(
+      rel='stylesheet'
+      href='stylesheets/seatplantry.css'
+    )
+  body
+    .container
+        h1.topic Ticketing
+        #broadcastInfo.
+          Cinema&nbsp;&nbsp;&nbsp;&nbsp;:  HK<br>
+          House&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:  House #{film.HouseID}<br>
+          Film&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:  #{film.FilmName}<br>
+          Category&nbsp;&nbsp;:  #{film.Category}<br>
+          Show Time&nbsp;:  #{film.Dates} (#{film.Day}) #{film.Time}
+        br
+        br
+          
+        form(
+          action='buyticket' 
+          onsubmit='return checkValid();' 
+          method='get'
+        )
+          #seats
+            input(
+              type='hidden' 
+              name='BroadCastID' 
+              value=`${film.BroadCastID}`
+            )
+            
+            - var row = house.HouseRow;
+            - var col = house.HouseCol;
+            - for (var i = row; i >= 1; i--)
+              - for (var j = 1; j <= col; j++)
+                - var seat = String.fromCharCode('A'.charCodeAt(0) + i - 1) + j;
+                //- results are sorted
+                if ticket[(i - 1) * col + j - 1].Valid == true  
+                  .seat.valid
+                    input.chkBox(
+                      type='checkbox'
+                      name='chkBox[]' 
+                      value=`${seat}`
+                    )
+                    br
+                    = seat
+                else
+                  .seat.invalid.
+                    Sold<br>
+                    #{seat}
+                  
+              br
+
+            #screen SCREEN
+          
+          br
+          br
+            
+          input.button(
+            type='submit' 
+            value='Submit'
+          )
+          
+          button.button(
+            onclick='location.href="buywelcome"' 
+            type='button'
+          ) Cancel
+          
+        
+    script.
+      function checkValid() {
+        var chkBox = document.getElementsByClassName("chkBox");
+        var select = false;
+        for (var i = chkBox.length - 1; i >= 0; --i)
+          if (chkBox[i].checked == true)
+            select = true;
+
+        if (select == false) {
+          alert('You haven't selected any seat!');	
+          return false;
+        }
+        return true;
+      }

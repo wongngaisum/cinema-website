@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css?family=Inconsolata');
+@import url('https://fonts.googleapis.com/css?family=Sofia');
+
+body {
+	background: url('../images/background.jpg') no-repeat fixed center center;
+	background-size: cover;
+	font-family: "Inconsolata", sans-serif;
+}
+
+.register-page {
+	position: absolute;
+	top: 50%;
+	border-radius: 5px;
+	border-top: 5px solid #ff656c;
+	position: relative;
+	background: #ffffff;
+	max-width: 480px;
+	margin: 100px auto;
+	padding: 45px;
+	text-align: center;
+	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+	opacity: 0.9;
+}
+
+form input {
+	width: 100%;
+}
+
+form input, .button {
+	background: #f2f2f2;
+	border: #eaeaea 1px solid;
+	width: 100%;
+	margin: 0 0 15px;
+	padding: 15px;
+	box-sizing: border-box;
+	font-size: 14px;
+	outline: 0;
+	font-family: "Inconsolata", sans-serif;
+}
+
+.button {
+	cursor: pointer;
+	background: #4CAF50;
+	text-transform: none;
+	border: medium none;
+	border-radius: 0 !important;
+	-webkit-appearance: button;
+	padding: 15px;
+	color: #FFFFFF;
+	font-size: 14px;
+}
+
+.button:hover, .button:active, .button:focus {
+	background: #43A047;
+	transition: all .4s ease;
+}
+
+#username {
+	background: #fff url('../images/ac.png') 15px no-repeat;
+	background-size: 20px 20px;
+	padding-left: 50px;
+}
+
+#username:focus {
+	background: #fff url('../images/ac_2.png') 15px no-repeat;
+	background-size: 20px 20px;
+	transition: all .4s ease;
+}
+
+#password {
+	background: #fff url('../images/pw.png') 15px no-repeat;
+	background-size: 20px 25px;
+	padding-left: 50px;
+}
+
+#password:focus {
+	background: #fff url('../images/pw_2.png') 15px no-repeat;
+	background-size: 20px 25px;
+	transition: all .4s ease;
+}
+
+input:active, input:focus {
+	border: 1px solid #ff656c;
+	transition: all .4s ease;
+}
+
+.title {
+	text-align: left;
+}
+
+hr {
+	display: block;
+	height: 1px;
+	border: 0;
+	border-top: 1px solid #ccc;
+}

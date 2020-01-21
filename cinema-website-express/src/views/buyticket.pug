@@ -1,0 +1,58 @@
+doctype html
+html
+  head
+    title Cart
+    meta(
+      name='viewport'
+      content='width=device-width, initial-scale=1.0'
+    )
+    link(
+      rel='stylesheet'
+      href='stylesheets/buyticket.css'
+    )
+  body
+    .container
+        h1.topic Cart
+        #broadcastInfo.
+          Cinema&nbsp;&nbsp;&nbsp;&nbsp;:  HK<br>
+          House&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:  House #{film.HouseID}<br>
+          Film&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:  #{film.FilmName}<br>
+          Category&nbsp;&nbsp;:  #{film.Category}<br>
+          Show Time&nbsp;:  #{film.Dates} (#{film.Day}) #{film.Time}
+        br
+        br
+          
+        form(
+          action='confirm' 
+          method='post'
+        )
+          input(
+            type='hidden' 
+            name='BroadCastID' 
+            value=`${film.BroadCastID}`
+          )
+          
+          
+          - var i = 0;
+          while i < seats.length
+            span #{seats[i]}&nbsp;
+            select.options(name=`${seats[i]}`)
+              option(value='adult') Adult($75)
+              option(value='studentOrSenior') Student/Senior($50)
+              
+            br
+            - i++
+          
+          br
+          br
+            
+          input.button(
+            type='submit' 
+            value='Comfirm'
+          )
+          
+          button.button(
+            onclick='location.href="buywelcome"' 
+            type='button'
+          ) Cancel
+          

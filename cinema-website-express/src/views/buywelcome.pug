@@ -1,0 +1,70 @@
+doctype html
+html
+  head
+    title Buy A Ticket
+    meta(
+      name='viewport'
+      content='width=device-width, initial-scale=1.0'
+    )
+    link(
+      rel='stylesheet'
+      href='stylesheets/buywelcome.css'
+    )
+  body
+    .nav
+      a.left(href='main') HK Cinema
+      a.right(href='logout') Logout
+      a.right(href='history') Purchase History
+      a.right(href='comment') Movie Review
+      a.right.active(href='buywelcome') Buy A Ticket
+    main
+      .container
+        h1 Buy A Ticket
+        br
+        br
+        if film.length == 0
+          h1 No film is available
+        else
+          - var current = 0;
+          - var i = 0;
+          while i < film.length
+            .film
+              if current != film[i].FilmID
+                - current = film[i].FilmID
+                h1= film[i].FilmName
+                br
+                img.images(src=`films_images/${film[i].PosterName}`)
+                br
+                h3= 'Synopsis: ' + film[i].Description
+                br
+                h4= 'Director: ' + film[i].Director
+                br
+                h4= 'Duration: ' + film[i].Duration
+                br
+                h4= 'Category: ' + film[i].Category
+                br
+                h4= 'Language: ' + film[i].Language
+                br
+                  
+                <form action='seatplantry' method='get'>
+                  <select id='broadcast' name='option'>     
+                    option(
+                      value=`${film[i].BroadCastID}`
+                    )= film[i].Dates + ' ' + film[i].Time + ' (' + film[i].Day + ') House ' + film[i].HouseID
+              else
+                option(
+                  value=`${film[i].BroadCastID}`
+                )= film[i].Dates + ' ' + film[i].Time + ' (' + film[i].Day + ') House ' + film[i].HouseID
+
+              if i + 1 == film.length || current != film[i + 1].FilmID
+                </select>
+                input.button(
+                  type='submit' 
+                  value='Submit'
+                )
+                </form>
+                br
+                br
+                hr
+                br
+              - i++

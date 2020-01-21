@@ -1,0 +1,47 @@
+doctype html
+html
+  head
+    title Purchase History
+    meta(
+      name='viewport'
+      content='width=device-width, initial-scale=1.0'
+    )
+    link(
+      rel='stylesheet'
+      href='stylesheets/history.css'
+    )
+  body
+    .nav
+      a.left(href='main') HK Cinema
+      a.right(href='logout') Logout
+      a.active.right(href='history') Purchase History
+      a.right(href='comment') Movie Review
+      a.right(href='buywelcome') Buy A Ticket
+    
+    main
+      .container
+        h1 Purchase History
+        br
+        br
+        h3= 'Username: ' + username
+        br
+        br
+        if tickets.length > 0
+          - var i = 0;
+          while i < tickets.length
+            - for (var j = 0; j < films.length; j++)
+              - if (tickets[i].BroadCastID == films[j].BroadCastID)
+                .record.
+                  TicketId&nbsp;: #{tickets[i]._id} $#{tickets[i].TicketFee}(#{tickets[i].TicketType})<br>
+                  House&nbsp;&nbsp;&nbsp;&nbsp;: #{films[j].HouseID}<br>
+                  Seat&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: #{tickets[i].SeatNo}<br>
+                  FilmName&nbsp;: #{films[j].FilmName}(#{films[j].Category}) #{films[j].Duration}<br>
+                  Language&nbsp;: #{films[j].Language}<br>
+                  Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: #{films[j].Dates}(#{films[j].Day}) #{films[j].Time}
+            
+            br
+            hr
+            br
+            - i++
+        else
+          | You have not purchased any ticket yet.
